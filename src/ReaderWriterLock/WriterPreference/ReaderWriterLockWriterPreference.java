@@ -62,3 +62,9 @@ public class ReaderWriterLockWriterPreference {
         }
     }
 }
+/*
+“How did you ensure writers don’t starve?”
+“I maintain a writeRequests counter.
+If a writer is waiting, new readers are blocked, even if there is no active writer.
+This ensures writers eventually get exclusive access, removing starvation.”
+ */
