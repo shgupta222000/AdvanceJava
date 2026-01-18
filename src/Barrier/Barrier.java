@@ -12,6 +12,9 @@ public class Barrier {
         this.totalThreads = totalThreads;
     }
     public synchronized void await() throws InterruptedException {
+        // block any new threads from proceeding till,
+        // all threads from previous barrier are released
+        while (count == totalThreads) wait();
         count++;
         if(count==totalThreads){
             notifyAll();
@@ -24,6 +27,7 @@ public class Barrier {
         released--;
         if (released==0){
             count=0;
+            notifyAll();// To wakeup any thread waiting at line 17
         }
     }
     public static void runTest() throws InterruptedException {
