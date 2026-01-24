@@ -219,3 +219,61 @@ If weights are only 0 and 1
 10️⃣ Dijkstra vs Bellman-Ford (ONE-LINE MEMORY)
 Dijkstra = Greedy = FINAL distance once picked
 Bellman Ford = DP = keep updating distances multiple times
+
+Dijkstra Matrix Implementation
+```java
+class Solution {
+    static class Cell {
+        int row, col, cost;
+        Cell(int r, int c, int cost) {
+            this.row = r;
+            this.col = c;
+            this.cost = cost;
+        }
+    }
+
+    public int dijkstra(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        int[][] dist = new int[m][n];
+        for (int[] d : dist) {
+            Arrays.fill(d, Integer.MAX_VALUE);
+        }
+
+        PriorityQueue<Cell> pq =
+            new PriorityQueue<>((a, b) -> a.cost - b.cost);
+
+        dist[0][0] = grid[0][0];
+        pq.add(new Cell(0, 0, grid[0][0]));
+
+        int[] dr = {1, -1, 0, 0};
+        int[] dc = {0, 0, 1, -1};
+
+        while (!pq.isEmpty()) {
+            Cell cur = pq.poll();
+
+            int r = cur.row;
+            int c = cur.col;
+
+            if (cur.cost > dist[r][c]) continue;
+
+            for (int i = 0; i < 4; i++) {
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+
+                if (nr < 0 || nc < 0 || nr >= m || nc >= n) continue;
+
+                int newCost = dist[r][c] + grid[nr][nc];
+
+                if (newCost < dist[nr][nc]) {
+                    dist[nr][nc] = newCost;
+                    pq.add(new Cell(nr, nc, newCost));
+                }
+            }
+        }
+
+        return dist[m - 1][n - 1];
+    }
+}
+```
