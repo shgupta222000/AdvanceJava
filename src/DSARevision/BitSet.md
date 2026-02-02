@@ -20,17 +20,29 @@ Bits say:
 “Stop counting. Start XOR-ing.”
 
 2️⃣ Core Bit Rules (MEMORIZE — NON-NEGOTIABLE)
+
 🔹 XOR Truth
+
+```text
 a ^ a = 0
 a ^ 0 = a
+```
 XOR is commutative & associative
+
 🔹 AND / OR
+```text
 a & 1 → check last bit
 a | 0 → unchanged
+```
 🔹 Shifts
+
+```java
 1 << k  → 2^k
 n >> 1  → divide by 2
+```
+
 3️⃣ Bit Pattern 1 — SINGLE NUMBER ⭐⭐⭐
+
 🔹 LC 136 — Single Number
 
 Problem:
